@@ -12,12 +12,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // UserData user = UserData();
-    // user.login();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      // home: SplashPage(),
-      home: LoginPage(),
+      home: SplashPage(),
     );
   }
 }

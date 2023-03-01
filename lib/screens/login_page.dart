@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:frontend/data/user_data.dart';
 import 'package:frontend/screens/home_page.dart';
 import 'package:frontend/theme.dart';
@@ -21,9 +22,7 @@ class _LoginPageState extends State<LoginPage> {
     var response =
         await user.login(emailController.text, passwordController.text);
 
-    dynamic userData = response['data'];
-
-    if (userData != null) {
+    if (response) {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return HomePage();
       }));

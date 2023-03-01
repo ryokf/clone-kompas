@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:frontend/data/article_data.dart';
 import 'package:frontend/screens/detail_news_page.dart';
+import 'package:frontend/screens/login_page.dart';
 import 'package:frontend/theme.dart';
 import 'package:frontend/widget/news_tile.dart';
+import 'package:http/http.dart';
 
 class HomePage extends StatelessWidget {
   // Map userData;
@@ -11,11 +14,12 @@ class HomePage extends StatelessWidget {
 
   Future<void> loadingData(context) async {
     ArticleData articleData = ArticleData();
-
     List<dynamic> articles = await articleData.getArticle();
 
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => _HomePage(articles)));
+    dynamic getUser = await SessionManager().get('id');
+
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => _HomePage(articles, getUser)));
   }
 
   @override
@@ -29,8 +33,9 @@ class HomePage extends StatelessWidget {
 
 class _HomePage extends StatefulWidget {
   List<dynamic> articles;
+  dynamic user;
 
-  _HomePage(this.articles);
+  _HomePage(this.articles, this.user);
 
   @override
   State<_HomePage> createState() => _HomePageState();
@@ -69,9 +74,9 @@ class _HomePageState extends State<_HomePage> {
     );
   }
 
-  Widget menu() {
+  menu() {
     return Center(
-      child: Text('menu page'),
+      child: Text(widget.user.toString()),
     );
   }
 
@@ -108,9 +113,15 @@ class _HomePageState extends State<_HomePage> {
           SizedBox(
             width: 15,
           ),
-          Image.asset(
-            'assets/icon-profile.png',
-            width: 26,
+          GestureDetector(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => LoginPage()));
+            },
+            child: Image.asset(
+              'assets/icon-profile.png',
+              width: 26,
+            ),
           ),
           SizedBox(
             width: 46,
