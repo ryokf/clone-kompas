@@ -29,6 +29,7 @@ class NewsTile extends StatelessWidget {
             children: [
               Expanded(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(

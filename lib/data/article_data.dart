@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ArticleData {
-  String baseUrl = 'http://192.168.1.11:8000/api';
+  String baseUrl = 'http://192.168.1.6:8000/api';
 
   Future<dynamic> getArticle({String? id}) async {
     String baseUrl = this.baseUrl + '/article';

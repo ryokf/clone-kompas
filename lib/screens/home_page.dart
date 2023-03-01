@@ -5,6 +5,10 @@ import 'package:frontend/theme.dart';
 import 'package:frontend/widget/news_tile.dart';
 
 class HomePage extends StatelessWidget {
+  // Map userData;
+
+  // HomePage(this.userData);
+
   Future<void> loadingData(context) async {
     ArticleData articleData = ArticleData();
 
@@ -34,9 +38,6 @@ class _HomePage extends StatefulWidget {
 
 class _HomePageState extends State<_HomePage> {
   int currentIndex = 0;
-  Widget makePopularNews() {
-    return Container();
-  }
 
   List<Widget> makeNews(context) {
     List<Widget> tiles = [];
@@ -60,6 +61,31 @@ class _HomePageState extends State<_HomePage> {
     });
 
     return tiles;
+  }
+
+  Widget bookmark() {
+    return Center(
+      child: Text('bookmark page'),
+    );
+  }
+
+  Widget menu() {
+    return Center(
+      child: Text('menu page'),
+    );
+  }
+
+  Widget body() {
+    switch (currentIndex) {
+      case 0:
+        return ListView(children: makeNews(context));
+      case 1:
+        return bookmark();
+      case 2:
+        return menu();
+      default:
+        return Container();
+    }
   }
 
   @override
@@ -91,7 +117,7 @@ class _HomePageState extends State<_HomePage> {
           ),
         ],
       ),
-      body: ListView(children: makeNews(context)),
+      body: body(),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: (value) {
